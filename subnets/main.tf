@@ -4,12 +4,12 @@ resource "aws_subnet" "main" {
   cidr_block = var.cidr_block[count.index]
   availability_zone = var.azi[count.index]
 
-  tags = merge(var.tags, {Name="${var.env}-${var.name}-subnet-${count.index+1}"})
+  tags = merge(var.tags, {Name="${var.env}-${var.name}-subnet-${count.index}"})
 
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = var.vpc_id
 
-  tags = merge(var.tags, {Name="${var.env}-${var.name}-igw-${count.index+1}"})
+  tags = merge(var.tags, {Name="${var.env}-${var.name}-igw-${count.index}"})
 }
