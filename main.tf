@@ -53,5 +53,5 @@ resource "aws_route" "ngw" {
   count = length(local.all_private_subnet_ids)
   route_table_id            = local.all_private_subnet_ids[count.index]
   destination_cidr_block    = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.ngw.*.id[count.index]
+  nat_gateway_id = element(aws_nat_gateway.ngw.*.id[count.index])
 }
