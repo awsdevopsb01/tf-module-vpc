@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.cidr_block
   enable_dns_support = true
   enable_dns_hostnames = true
   tags= merge(var.tags,{Name="${var.env}-vpc"})
@@ -36,10 +36,6 @@ resource "aws_nat_gateway" "ngw" {
   subnet_id     = module.subnets["public"].subnet_ids[count.index]
 
   tags = merge(var.tags, {Name="${var.env}-ngw-${count.index}" })
-}
-
-output "subnet_ids" {
-  value = module.subnets
 }
 
 resource "aws_route" "igw" {
